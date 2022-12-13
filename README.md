@@ -1,24 +1,43 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## Initial setup
+```
+cp .env.example .env
+docker compose build
+docker compose run --rm web bin/rails db:setup
+```
 
-* Ruby version
+## Running the Rails app
+```
+docker compose up
+```
 
-* System dependencies
+## Running the Rails console
+When the app is already running with `docker-compose` up, attach to the container:
+```
+docker compose exec web bin/rails c
+```
 
-* Configuration
+When no container running yet, start up a new one:
+```
+docker compose run --rm web bin/rails c
+```
 
-* Database creation
+## Running tests
+```
+docker compose run --rm web bin/rspec
+```
 
-* Database initialization
+## Updating gems
+```
+docker compose run --rm web bundle update
+docker compose up --build
+```
 
-* How to run the test suite
+## Production build
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+docker build -f production.Dockerfile .
+```
 
-* Deployment instructions
-
-* ...
