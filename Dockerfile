@@ -1,14 +1,15 @@
-FROM ruby:3.1.3-slim
+FROM ruby:3.1.3
 
 RUN apt-get update -qq && apt-get install -yq --no-install-recommends \
     build-essential \
     gnupg2 \
-    less \
-    git \
     libpq-dev \
     postgresql-client \
     libvips42 \
-  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    nodejs \
+    yarn \
+    npm \
+    && npm install -g yarn
 
 ENV LANG=C.UTF-8 \
   BUNDLE_JOBS=4 \
